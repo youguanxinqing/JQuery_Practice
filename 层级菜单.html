@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>层级菜单</title>
+	<script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
+	<script type="text/javascript">
+	$(function(){
+		// 初始化隐藏所欲li标签中，即隐藏二级菜单
+		$("li").css({display:"none"});
+
+		// 鼠标进入一级菜单，下拉对应二级菜单，上拉其他一级菜单下的二级菜单
+		$("a").mouseover(function(){
+			$(this).siblings("li").stop().slideDown();
+			$(this).parent().siblings().children("li").stop().slideUp();
+		});
+
+		// 鼠标离开菜单之后，上拉所有二级菜单
+		$("ul").mouseleave(function(){
+			$("li").stop().slideUp();
+		});
+	})
+	</script>
+	<style type="text/css">
+		div{
+			width: 132px;
+			height: 368px;
+			margin: 10% auto;
+		}
+		ul{
+			list-style: none;
+			font-size: 0;
+			margin: 0;
+			padding: 0;
+		}
+		a{
+			width: 130px;
+			height: 40px;
+			text-decoration: none;
+			background: #0A66F9;
+			display: block;
+			color: white;
+			font-family: "微软雅黑";
+			font-weight: bold;
+			font-size: 17px;
+			text-align: center;
+			line-height: 40px;
+			letter-spacing: 2px;
+			border: 1px solid white;
+		}
+		li{
+			width: 130px;
+			height: 20px;
+			background: #220AF5;
+			color: #FCFCF8;
+			font-size: 14px;
+			font-family: "微软雅黑";
+			text-align: center;
+			cursor: pointer;
+			user-select: none;
+		}
+
+		/*实现鼠标悬浮，改变背景色*/
+		a:hover,a:active{
+			background: #FB9C09;
+		}
+		li:hover,li:active{
+			background: #0F67F3;
+		}
+
+	</style>
+</head>
+<body>
+
+	<div>
+	<ul>
+		<a href="">落落</a>
+		<li>须臾</li>
+		<li>不朽</li>
+		<li>年华是无效信</li>
+		<li>全宇宙至此剧终</li>
+	</ul>
+	<ul>
+		<a href="">郭敬明</a>
+		<li>爵迹</li>
+		<li>夏至未至</li>
+		<li>悲伤逆流成河</li>
+		<li>梦里花落知多少</li>
+	</ul>
+	<ul>
+		<a href="">安东尼</a>
+		<li>陪I</li>
+		<li>陪II</li>
+		<li>陪III</li>
+		<li>这些都是你给我的爱</li>
+	</ul>
+	</div>
+	
+</body>
+</html>

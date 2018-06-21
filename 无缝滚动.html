@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>无缝滚动</title>
+	<script type="text/javascript" src="../JQuery/js/jquery-1.12.4.min.js"></script>
+	<script type="text/javascript">
+
+	$(function(){
+		
+		// 获取ul标签内的内容，拼接以后写进标签当中
+		$("ul").html($("ul").html()+$("ul").html());
+		
+		// left：左移动距离；speed：地移动速度
+		var left = 0;
+		var speed = 2;
+
+		// 点击左按钮向左运动，右按钮右运动
+		$(".left").click(function(){
+			speed = 2;
+		});
+		$(".right").click(function(){
+			speed = -2;
+		});
+
+		// 设置计时器
+		var timer = setInterval(move, 30);
+		
+		// 实现无缝拼接的逻辑代码
+		// 每移动完一个ul内容后，瞬间把之前移动的部分写回div盒子中
+		function move(){
+			if(left<=-583.5)
+				left = 0;
+			else if(left>=0){
+				left = -583.5;
+			}
+			left += -speed;
+			$("ul").css({left:left+"px"});
+		}
+
+		// 鼠标碰到图片运动停止
+		$("li").mouseover(function(){
+			clearInterval(timer);
+		});
+		// 鼠标离开图片运动继续
+		$("li").mouseout(function(){
+			timer = setInterval(move, 30);
+		});
+
+
+	})
+		
+	</script>
+	<style type="text/css">
+		
+		.box{
+			width: 600px;
+			height: 150px;
+			border: 1px solid;
+			border-color: gray;
+			margin: 100px auto 0;
+			text-align: center;
+			position: relative;
+			padding: 0;
+			overflow: hidden;
+			border-radius: 25px;
+		}
+		ul{
+			list-style: none;
+			padding: 0px;
+			width: 1200px;
+			height: 150px;
+			margin: 0;
+			position: absolute;
+		}
+		li{
+			width: 100px;
+			height:90px;
+			float: left;
+			margin: 30px 0 30px 16.6px; 
+			line-height: 90px;
+			font-size: 15px;
+			user-select: none;
+			cursor: pointer;
+		}
+		img{
+			width: 100px;
+			height: 90px;
+			border-radius: 25px;
+			display: inline-block;
+		}
+		input{
+			position: relative;
+			left: 45%;
+		}
+		
+		/*实现图片的阴影效果*/
+		.shadow{  
+   			-webkit-box-shadow: #666 0px 0px 10px;
+   			-moz-box-shadow: #666 0px 0px 10px;
+   			box-shadow: #666 0px 0px 15px;
+   			background: #EEFF99;
+		}
+		/*实现图片的等比变大效果*/
+		img:hover, img:active{
+			transform: scale(1.5);
+		}
+	
+	</style>
+</head>
+<body>
+
+
+	<div class="box">
+		
+		<ul>
+			<li><img src="images/1.jpg" alt="" class="shadow"></li>
+			<li><img src="images/2.jpg" alt="" class="shadow"></li>
+			<li><img src="images/3.jpg" alt="" class="shadow"></li>
+			<li><img src="images/4.jpg" alt="" class="shadow"></li>
+			<li><img src="images/5.jpg" alt="" class="shadow"></li>
+		</ul>
+	</div>
+	<br />
+	
+	<input type="button" name="" value="左向运动" class="left" />
+	<input type="button" name="" value="右向运动" class="right" />
+	
+</body>
+</html>

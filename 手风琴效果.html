@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>手风琴</title>
+	<script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
+	<script type="text/javascript">
+	$(function(){
+		// 设置一个颜料盒
+		var colorBox = ["#008000", "#FFA500", "#FF4500", "#A52A2A", "#DC143C"];
+		$("li").each(function(){
+			// 对每个span元素上背景色
+			$(this).children("span").css({background:colorBox[$(this).index()]});
+			// 相对父元素div，对每个li元素向右移动 [索引值]*20 个像素，使得每个span整齐陈列
+			$(this).css({left:($(this).index()*20)+"px"});
+
+			// 初次打开网页，对除了第一个li元素外，每个li全部移动到最右边
+			if($(this).index()==0){
+				;
+			}
+			else {
+				$(this).css({left:600+$(this).index()*20+"px"});
+			}
+		});
+
+		// 实现手风琴点击事件
+		$("li").click(function(){
+			// 如果left值大于500个像素，即li标签在右边
+			// 那么点击的时候就像左边移动
+			if($(this).css("left")>"500px"){
+
+				$(this).animate({left:$(this).index()*20+"px"});
+			}
+			// 否则除第一个li元素外，其他小于500像素的li（即在左边的元素），在点击事件发生后
+			// 移向右边
+			else{
+				if($(this).index()==0){
+					;
+				}
+				else {
+					$(this).animate({left:600+$(this).index()*20+"px"});
+				}
+			}
+			
+			// 对每个被点击li的元素后面的同级元素操作
+			// 操作效果：移向右边
+			$(this).nextAll().each(function(){
+				$(this).animate({left:600+$(this).index()*20+"px"});
+			}, 1000);
+
+			// 对每个被点击li的元素前面的同级元素操作
+			// 操作效果：移向左边
+			$(this).prevAll().each(function(){
+				$(this).animate({left:$(this).index()*20+"px"});
+			}, 1000);
+		});
+
+
+	});
+		
+	</script>
+	<style type="text/css">
+		
+		div{
+			width: 700px;
+			height: 370px;
+			margin: 6% auto;
+			position: relative;
+			overflow: hidden;
+			text-align: center;
+		}
+		ul{
+			list-style: none;
+		}
+		li{
+			width: 620px;
+			float: left;
+			position: absolute;
+		}
+		span{
+			width: 20px;
+			height: 340px;
+			display: inline-block;
+			background: green;
+			text-align: center;
+			margin: 0px;
+			cursor: pointer;
+			user-select: none;
+			font-size: 15px;
+			font-family: "宋体";
+			font-weight: bold;
+			padding-top: 10px;
+		}
+		img{
+			width:600px;
+			height:350px;
+			float:right;
+		}
+
+	</style>
+</head>
+<body>
+
+	<div class="divbox">
+	<ul>
+		<li><span>落落美美哒照片1</span><img src="images/1.jpg"></li>
+		<li><span>落落美美哒照片2</span><img src="images/2.jpg"></li>
+		<li><span>落落美美哒照片3</span><img src="images/3.jpg"></li>
+		<li><span>落落美美哒照片4</span><img src="images/4.jpg"></li>
+		<li><span>落落美美哒照片5</span><img src="images/5.jpg"></li>
+	</ul>
+	</div>
+	
+</body>
+</html>

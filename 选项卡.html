@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>选项卡</title>
+	<script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
+	<script type="text/javascript">
+	$(function(){
+		// 设置一个颜料盒
+		var colorBox = ["#F132B1", "#A00DD2", "#07910F", "#F8F607", "#F75704"];
+		// 对每个li背景，图片框设置初始颜色
+		$("li").each(function(){
+			$(this).children("span").css({background:colorBox[$(this).index()],left:$(this).index()*110+"px",top:0});
+			$(this).children("img").css({borderColor:colorBox[$(this).index()]});
+		});
+		// 最初将除第一张图片以外的所有隐藏
+		$("li").first().siblings().children("img").css({display:"none"});
+
+		// 实现选项卡的点击事件，显示对应图片，以及隐藏其他图片
+		$("li").click(function(){
+			$(this).children("img").css({display:"block"})
+			$(this).siblings().children("img").css({display:"none"});
+		});
+	})
+	</script>
+	<style type="text/css">
+	div{
+		width: 600px;
+		margin: 50px auto;
+		position: relative;
+	}
+	ul{list-style: none;margin: auto}
+	li{
+		width: 600px;
+		height: 450px;
+	}
+	span{
+		width: 110px;
+		height: 50px;
+		border-radius: 20px;
+		display: block;
+		text-align: center;
+		line-height: 50px;
+		user-select: none;
+		cursor: pointer;
+		float: left;
+		border-radius: 0 25px 0 0;
+		position: absolute;
+
+	}
+
+	img{
+		width: 590px;
+		height: 348px;
+		position: absolute;
+		top: 50px;
+		left: 0px;
+		border: 4px solid;
+		border-radius: 0 25px 0 0;
+	}
+		
+	</style>
+</head>
+<body>
+	<div>
+	<ul>
+		<li><span>落落1</span></span><img src="images/1.jpg" alt=""></li>
+		<li><span>落落2</span></span><img src="images/2.jpg" alt=""></li>
+		<li><span>落落3</span></span><img src="images/3.jpg" alt=""></li>
+		<li><span>落落4</span></span><img src="images/4.jpg" alt=""></li>
+		<li><span>落落5</span></span><img src="images/5.jpg" alt=""></li>
+	</ul>
+	</div>
+	
+</body>
+</html>

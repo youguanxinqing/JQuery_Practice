@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>置顶菜单</title>
+	<script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
+	<script type="text/javascript">
+	$(function(){
+		
+		$(window).scroll(function(){
+			// 固定指定菜单
+			$(".menu").css({top:0});
+			
+			// 对状态栏设置，如果滑动条滑动100个单位，状态栏设置固定定位
+			// 如果滑动距离低于100个单位，状态栏继承父级定位	
+			if($(window).scrollTop()>=100){
+				$(".bar").css({position:"fixed",top:"54px",marginLeft:"46.9px"});
+			}else {
+				$(".bar").css({position:"static",margin:"10 auto"});
+			}
+
+			// 返回顶部按钮的淡入淡出
+			if($(window).scrollTop()>=200){
+				$(".return").fadeIn();
+			}else {
+				$(".return").fadeOut();
+			}
+
+			// 动画效果实现顶部按钮的返回功能
+			$(".return").click(function(){
+				$('html,body').stop().animate({'scrollTop':0});
+			});
+		});
+	})
+		
+	</script>
+	<style type="text/css">
+		body{
+			margin: 0;
+			padding: 0;
+			height: 1500px;
+		}
+		.menu{
+			width: 1345px;
+			height: 50px;
+			margin: auto;
+			border: 2px solid;
+			border-color: #eb7350;
+			background-color: #fff;
+			text-align: center;
+			line-height: 50px;
+			color: gray;
+			position: fixed;
+			z-index: 1000;
+		}
+		.center,.left,.right{
+			border: 1px solid;
+		}
+		.center{
+			width: 1347px;
+			height: 100px;
+			position: absolute;
+			top: 51px;
+			background: gray;
+			text-align: center;
+			line-height: 100px;
+			padding: 0;
+			z-index: 999;
+		}
+		.left{
+			width: 30%;
+			height: 1000px;
+			float: left;
+			margin-top: 152px;
+			background: #F76A0B;
+		}
+		.right{
+			width: 69%;
+			height: 1000px;
+			float: right;
+			margin-top: 152px;
+			background: #7CFA0E
+		}
+		.bar{
+			width: 837px;
+			height: 30px;
+			background: #6584F0;
+			margin: 10px auto 0;
+			text-align: center;
+			line-height: 30px;
+		}
+		.return{
+			width: 50px;
+			height: 50px;
+			border-radius: 50%;
+			background: gold;
+			position: fixed;
+			top: 85%;
+			left: 95%;
+			text-align: center;
+			line-height: 50px;
+			user-select: none;
+			cursor: pointer;
+			display: none;
+		}
+	</style>
+</head>
+<body>
+
+	<div class="menu">菜单</div>
+	<div class="center">LOGO</div>
+	<div class="left"></div>
+	<div class="right">
+		<div class="bar">状态栏</div>
+	</div>
+	<div class="return">Top</div>
+	
+</body>
+</html>
